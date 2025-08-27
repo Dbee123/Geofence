@@ -1,0 +1,476 @@
+/* Color Variables */
+:root {
+  --primary: #6366f1;
+  --primary-light: #a5b4fc;
+  --primary-black: black;
+  --primary-dark: #4f46e5;
+  --secondary: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --text: #1f2937;
+  --text-light: #6b7280;
+  --bg: #f9fafb;
+  --card-bg: #ffffff;
+  --border: #e5e7eb;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Base Styles */
+.dashboard {
+  padding: 2rem;
+  background-color: var(--bg);
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.header h1 span {
+  color: var(--primary);
+}
+
+.refreshButton {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.refreshButton:hover {
+  background-color: var(--primary-dark);
+}
+
+.refreshButton:disabled {
+  background-color: var(--primary-light);
+  cursor: not-allowed;
+}
+
+.icon {
+  font-size: 1rem;
+}
+
+/* Loading State */
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 0.25rem solid var(--primary-light);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.statCard {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.statIcon {
+  background-color: var(--primary-black);
+  color: var(--bg);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.statIcon .icon {
+  font-size: 1.5rem;
+}
+
+.statContent h3 {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin: 0 0 0.25rem;
+  font-weight: 500;
+}
+
+.statContent p {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.trend {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 1rem 1rem 0;
+  border-color: transparent var(--primary-black) transparent transparent;
+}
+
+.trend.up {
+  border-color: transparent var(--secondary) transparent transparent;
+}
+
+.trend.down {
+  border-color: transparent var(--danger) transparent transparent;
+}
+
+.trend.neutral {
+  border-color: transparent var(--warning) transparent transparent;
+}
+
+/* Main Content Layout */
+.mainContent {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Chart Styles */
+.chartContainer {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.chartContainer h3 {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin: 0 0 1.5rem;
+  font-weight: 600;
+}
+
+.chart {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chartBars {
+  display: flex;
+  height: 100%;
+  align-items: flex-end;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.chartBarGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+}
+
+.chartBarLabel {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.chartBarsContainer {
+  display: flex;
+  gap: 4px;
+  align-items: flex-end;
+  height: 120px; /* Make this at least 100-150px */
+  min-height: 120px;
+}
+
+.chartBar {
+  width: 14px; /* make sure it's not 0 or too thin */
+  min-height: 2px; /* ensure even value 1 renders something */
+  transition: height 0.3s ease;
+  border-radius: 4px;
+}
+
+.chartBar.clockIn {
+  background-color: var(--primary);
+}
+
+.chartBar.clockOut {
+  background-color: var(--secondary);
+}
+
+.chartLegend {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.legendColor {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 4px;
+}
+
+.legendColor.clockIn {
+  background-color: var(--primary);
+}
+
+.legendColor.clockOut {
+  background-color: var(--secondary);
+}
+
+.emptyChart {
+  text-align: center;
+  color: var(--text-light);
+  padding: 2rem 0;
+}
+
+/* Quick Actions */
+.quickActions {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.quickActions h3 {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin: 0 0 1.5rem;
+  font-weight: 600;
+}
+
+.actionGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.actionButton {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.actionButton:hover {
+  background-color: var(--bg);
+  border-color: var(--primary-light);
+  color: var(--primary);
+}
+
+.actionButton .icon {
+  font-size: 1.1rem;
+}
+
+/* Activity Section */
+.activitySection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.activityFeed {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.activityFeed h3 {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin: 0 0 1.5rem;
+  font-weight: 600;
+}
+
+.feedContent {
+  max-height: 250px; /* Or any height you want */
+  overflow-y: auto;
+  padding-right: 8px; /* optional: space for scrollbar */
+  margin-top: 8px;
+}
+
+/* Optional: make scrollbar sleek */
+.feedContent::-webkit-scrollbar {
+  width: 6px;
+}
+.feedContent::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.feedList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feedItem {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.feedItem:last-child {
+  border-bottom: none;
+}
+
+.feedIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 8px;
+  background-color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.feedIcon .icon {
+  font-size: 1.1rem;
+}
+
+.feedDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.feedUser,
+.feedSubject {
+  font-weight: 500;
+  color: var(--text);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.feedTime {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  display: block;
+}
+
+.feedLocation {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-left: auto;
+  padding-left: 1rem;
+  white-space: nowrap;
+}
+
+.feedStatus {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-left: auto;
+}
+
+.feedStatus.pending {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+}
+
+.feedStatus.resolved {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--secondary);
+}
+
+.emptyFeed {
+  text-align: center;
+  color: var(--text-light);
+  padding: 2rem 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .mainContent {
+    grid-template-columns: 1fr;
+  }
+
+  .activitySection {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard {
+    padding: 1rem;
+  }
+}

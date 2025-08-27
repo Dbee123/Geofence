@@ -1,12 +1,50 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Geofence Web Portal (React.js + Vite)
 
-## Expanding the ESLint configuration
+[![React](https://img.shields.io/badge/React-blue.svg)](https://reactjs.org/)  
+[![Vite](https://img.shields.io/badge/Vite-Frontend-purple.svg)](https://vitejs.dev/)  
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This branch contains the **Web Portal** for the Geofencing System, built with **React.js (Vite)**.  
+It provides an admin-facing dashboard to manage geofence data.
+
+---
+
+## Features
+- User-friendly admin interface  
+- Real-time interaction with backend APIs  
+- Role-based access  
+- Fast dev server powered by Vite  
+
+---
+
+##  Installation & Setup
+
+### Clone the Repository
+```bash
+git clone https://github.com/Dbee123/Geofence.git
+cd Geofence
+git checkout webportal
+```
+
+### Install Dependencies
+```bash
+npm install
+```
+### Start the Development Server
+```bash
+npm run dev
+```
+
+Visit the URL shown in the terminal (usually:
+http://localhost:5173
+)
+
+ Authentication
+
+Log in using the admin credentials created in the Backend (main branch).
+
+ The Web Portal is now ready for use.

@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "fieldlog",
+    "slug": "fieldlog",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/login-icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/login-icon.png",
+        "backgroundColor": "#fff"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.khisseh.fieldlog",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyB1mWTYxYQ7JKhfqwNzUrPox1DDvrWZjik"
+        }
+      }
+    },
+    "web": {
+      "favicon": "./assets/login-icon.png"
+    }
+  }
+}

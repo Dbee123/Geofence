@@ -1,0 +1,42 @@
+const handleClockInOut = useCallback(async (action, options = {}) => {
+  const { isAuto = false, overrideGeofence = null } = options;
+  
+  if (!location) {
+    return showToast('error', 'Error', 'Location not available');
+  }
+
+  try {
+    setIsLoading(true);
+    
+    // For manual clock-out, use currentGeofence
+    // For auto clock-out, use overrideGeofence (original clock-in geofence)
+    const targetGeofence = isAuto ? overrideGeofence : currentGeofence;
+    
+    const payload = {
+      latitude: location.latitude,
+      longitude: location.longitude,
+      geofence_id: targetGeofence?.id || null
+    };
+
+    if (action === 'clock-in') {
+      // Existing clock-in logic
+      await clockIn(userToken, payload);
+      // ... rest of clock-in ...
+    } else {
+      console.log(`[${isAuto ? 'Auto ' : ''}Clock-Out] At ${targetGeofence?.name || 'unknown location'}`);
+      await clockOut(userToken, payload);
+      
+      setLastAction('clock-out');
+      setClockedInTime(null);
+      await AsyncStorage.removeItem(CLOCK_IN_GEOFENCE_KEY);
+      setClockInGeofence(null);
+      
+      showToast('success', 'Success', `Clocked out from ${targetGeofence?.name || 'your location'}`);
+    }
+  } catch (error) {
+    console.error(`[${isAuto ? 'Auto ' : ''}Clock-Out] Error:`, error);
+    showToast('error', 'Error', error.message || 'Action failed');
+  } finally {
+    setIsLoading(false);
+  }
+}, [location, currentGeofence, userToken, showToast]);

@@ -24,7 +24,7 @@
       "package": "com.khisseh.fieldlog",
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyB1mWTYxYQ7JKhfqwNzUrPox1DDvrWZjik"
+          "apiKey": ""
         }
       }
     },
